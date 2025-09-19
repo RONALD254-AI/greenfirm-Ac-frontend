@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cyber Security Learning - Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/scrollreveal"></script>
@@ -23,11 +24,18 @@
       border: 2px solid #00ff00;
       box-shadow: 0 0 15px #00ff00;
       animation: glow 1.5s infinite alternate;
+      min-width: 200px; /* Better tap area */
     }
 
     @keyframes glow {
       from { box-shadow: 0 0 10px #00ff00; }
       to   { box-shadow: 0 0 25px #00ff00, 0 0 50px #00ff00; }
+    }
+
+    /* Handle iOS safe area */
+    body {
+      padding: env(safe-area-inset-top) env(safe-area-inset-right)
+               env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
   </style>
 </head>
@@ -38,43 +46,43 @@
 
   <!-- Header -->
   <header class="bg-gradient-to-r from-green-700 to-green-500 p-6 shadow-md relative z-10">
-    <h1 class="text-3xl font-bold text-center">GreenFirmKenya Cyber Security Academy</h1>
+    <h1 class="text-2xl md:text-3xl font-bold text-center">GreenFirmKenya Cyber Security Academy</h1>
   </header>
 
   <!-- Hero Section -->
-  <section class="flex flex-col items-center justify-center text-center py-20 px-6 relative z-10">
-    <h2 class="text-4xl md:text-5xl font-extrabold mb-6 text-green-400 reveal">
+  <section class="flex flex-col items-center justify-center text-center py-16 px-4 md:px-6 relative z-10">
+    <h2 class="text-3xl md:text-5xl font-extrabold mb-6 text-green-400 reveal">
       Master Cyber Security Today
     </h2>
-    <p class="text-lg md:text-xl max-w-2xl mb-8 text-gray-300 reveal">
+    <p class="text-base md:text-lg max-w-2xl mb-8 text-gray-300 reveal">
       Join our academy and gain the essential skills to protect systems, networks, and data.  
       Get hands-on training, expert mentorship, and an industry-recognized <span class="font-semibold text-green-400">Certification</span> at the end of your course.
     </p>
     <a href="register.html" 
-       class="glow-btn bg-black text-green-400 font-semibold px-8 py-4 rounded-lg text-lg shadow-lg transform hover:scale-105 transition duration-300 reveal">
+       class="glow-btn bg-black text-green-400 font-semibold px-6 py-3 md:px-8 md:py-4 rounded-lg text-base md:text-lg shadow-lg transform hover:scale-105 transition duration-300 reveal">
       Register Now
     </a>
   </section>
 
   <!-- Features Section -->
-  <section class="grid md:grid-cols-3 gap-8 px-10 py-16 bg-gray-800 text-center relative z-10">
+  <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 px-6 md:px-10 py-12 md:py-16 bg-gray-800 text-center relative z-10">
     <div class="p-6 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition transform hover:scale-105 reveal">
-      <h3 class="text-xl font-semibold text-green-400 mb-3">Practical Learning</h3>
-      <p>Work on real-world cybersecurity challenges and build strong problem-solving skills.</p>
+      <h3 class="text-lg md:text-xl font-semibold text-green-400 mb-3">Practical Learning</h3>
+      <p class="text-sm md:text-base">Work on real-world cybersecurity challenges and build strong problem-solving skills.</p>
     </div>
     <div class="p-6 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition transform hover:scale-105 reveal">
-      <h3 class="text-xl font-semibold text-green-400 mb-3">Expert Mentors</h3>
-      <p>Learn directly from experienced professionals in the cybersecurity field.</p>
+      <h3 class="text-lg md:text-xl font-semibold text-green-400 mb-3">Expert Mentors</h3>
+      <p class="text-sm md:text-base">Learn directly from experienced professionals in the cybersecurity field.</p>
     </div>
     <div class="p-6 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition transform hover:scale-105 reveal">
-      <h3 class="text-xl font-semibold text-green-400 mb-3">Certification</h3>
-      <p>Earn an industry-recognized certification to boost your career opportunities.</p>
+      <h3 class="text-lg md:text-xl font-semibold text-green-400 mb-3">Certification</h3>
+      <p class="text-sm md:text-base">Earn an industry-recognized certification to boost your career opportunities.</p>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="bg-gray-900 text-center py-6 border-t border-gray-700 relative z-10">
-    <p class="text-gray-400">© 2025 GreenFirmKenya Cyber Security Academy. All rights reserved.</p>
+    <p class="text-gray-400 text-sm md:text-base">© 2025 GreenFirmKenya Cyber Security Academy. All rights reserved.</p>
   </footer>
 
   <!-- Scroll Animation Script -->
@@ -94,25 +102,31 @@
     const canvas = document.getElementById("matrixCanvas");
     const ctx = canvas.getContext("2d");
 
-    // Resize canvas
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
+    function resizeCanvas() {
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+    }
+    resizeCanvas();
 
     const letters = "01";
     const fontSize = 16;
-    const columns = canvas.width / fontSize;
-    const drops = [];
+    let columns = canvas.width / fontSize;
+    let drops = [];
 
-    for (let x = 0; x < columns; x++) {
-      drops[x] = 1;
+    function initDrops() {
+      columns = canvas.width / fontSize;
+      drops = [];
+      for (let x = 0; x < columns; x++) {
+        drops[x] = 1;
+      }
     }
+    initDrops();
 
     function draw() {
-      // Fading effect for trail
       ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = "#00FF00"; // Matrix green
+      ctx.fillStyle = "rgba(0, 255, 0, 0.4)"; // 40% transparency
       ctx.font = fontSize + "px monospace";
 
       for (let i = 0; i < drops.length; i++) {
@@ -128,10 +142,10 @@
 
     setInterval(draw, 40);
 
-    // Responsive canvas
+    // Handle resize (desktop/mobile orientation change)
     window.addEventListener("resize", () => {
-      canvas.height = window.innerHeight;
-      canvas.width = window.innerWidth;
+      resizeCanvas();
+      initDrops();
     });
   </script>
 </body>
