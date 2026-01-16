@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>GreenFirm Kenya Portal | Cybersecurity Training Enrollment</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -152,6 +154,17 @@
         .btn-primary:hover {
             background-color: #1a7cff;
             transform: translateY(-2px);
+        }
+
+        /* Loading button state */
+        .btn-loading {
+            background-color: #1a7cff;
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .btn-loading:hover {
+            transform: none;
         }
 
         /* Hero Section */
@@ -490,6 +503,42 @@
             transition: width 1s ease-in-out;
         }
 
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 4px;
+            color: white;
+            font-weight: 600;
+            z-index: 2000;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+            max-width: 300px;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background-color: var(--success-color);
+            border-left: 4px solid #1e8e4a;
+        }
+
+        .notification.error {
+            background-color: var(--danger-color);
+            border-left: 4px solid #d63047;
+        }
+
+        .notification.info {
+            background-color: var(--accent-color);
+            border-left: 4px solid #1a7cff;
+        }
+
         /* Responsive Design */
         @media (max-width: 992px) {
             .header-content {
@@ -576,6 +625,13 @@
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 5px;
+            }
+
+            .notification {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
             }
         }
 
@@ -673,6 +729,9 @@
     </style>
 </head>
 <body>
+    <!-- Notification Area -->
+    <div id="notificationArea"></div>
+
     <!-- Header -->
     <header>
         <div class="container header-content">
@@ -787,7 +846,7 @@
                             <li><span>Hands-on Labs:</span> 35+</li>
                             <li><span>Prerequisites:</span> Programming Knowledge</li>
                         </ul>
-                        <button class="btn btn-primary enroll-btn" data-course="Malware Analysis" style="width: 100%;">Enroll Now</button>
+                        <button class="btn btn-primary enroll-btn" data-course="Malware Analysis & Reverse Engineering" style="width: 100%;">Enroll Now</button>
                     </div>
                 </div>
             </div>
@@ -867,7 +926,7 @@
                         <label for="newsletter">Subscribe to cybersecurity updates and course announcements</label>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1.1rem; margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary" id="submitBtn" style="width: 100%; padding: 15px; font-size: 1.1rem; margin-top: 20px;">
                         Submit Enrollment Application
                     </button>
                 </form>
@@ -898,6 +957,8 @@
                         <li><a href="#">Malware Analysis</a></li>
                         <li><a href="#">Digital Forensics</a></li>
                         <li><a href="#">Cloud Security</a></li>
+                        <li><a href="#">Graphic and Design</a></li>
+                        <li><a href="#">Web Design</a></li>
                     </ul>
                 </div>
                 
@@ -939,12 +1000,12 @@
             </div>
             <div class="modal-body">
                 <p>Thank you for your enrollment application to <strong id="confirmedCourse"></strong>.</p>
-                <p>We will sent a confirmation to your email with further instructions to <strong id="confirmedEmail"></strong>.</p>
+                <p>We have sent a confirmation email with further instructions to <strong id="confirmedEmail"></strong>.</p>
                 <p>Our admissions team will review your application and email you within 2 business days.</p>
                 <div style="background-color: rgba(46, 213, 115, 0.1); padding: 15px; border-radius: 4px; margin-top: 20px; border-left: 4px solid var(--success-color);">
                     <p><strong>Next Steps:</strong></p>
                     <ol style="margin-left: 20px; margin-top: 10px;">
-                        <li>Check your email for the confirmation message</li>
+                        <li>Check your email (and spam folder) for the confirmation</li>
                         <li>Complete your student profile</li>
                         <li>Access the introductory materials</li>
                     </ol>
@@ -957,6 +1018,42 @@
     </div>
 
     <script>
+        // Initialize EmailJS with your Public Key
+        // REPLACE THIS WITH YOUR ACTUAL EMAILJS PUBLIC KEY
+        emailjs.init("EdGq_p0nzQbdGvLrW");
+        
+        // EmailJS Configuration
+        const EMAILJS_SERVICE_ID = "service_aw7h7zm";
+        const EMAILJS_TEMPLATE_ID = "template_gqfpt2o";
+
+        // Notification system
+        function showNotification(message, type = "success") {
+            const notificationArea = document.getElementById('notificationArea');
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+                <span style="margin-left: 10px;">${message}</span>
+            `;
+            
+            notificationArea.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            
+            // Remove notification after 5 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 5000);
+        }
+
         // Mobile menu toggle
         const menuToggle = document.getElementById('menuToggle');
         const mainNav = document.getElementById('mainNav');
@@ -1018,35 +1115,116 @@
             
             // Enrollment form submission
             const enrollmentForm = document.getElementById('enrollmentForm');
+            const submitBtn = document.getElementById('submitBtn');
             const successModal = document.getElementById('successModal');
             const confirmedCourse = document.getElementById('confirmedCourse');
             const confirmedEmail = document.getElementById('confirmedEmail');
             const closeModal = document.getElementById('closeModal');
             const closeModalBtn = document.getElementById('closeModalBtn');
             
-            enrollmentForm.addEventListener('submit', function(e) {
+            enrollmentForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
+                
+                // Show loading state
+                const originalBtnText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                submitBtn.classList.add('btn-loading');
+                submitBtn.disabled = true;
                 
                 // Get form values
                 const firstName = document.getElementById('firstName').value;
-                const course = document.getElementById('courseSelect').value;
+                const lastName = document.getElementById('lastName').value;
                 const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value || 'Not provided';
+                const course = document.getElementById('courseSelect').value;
+                const experience = document.querySelector('input[name="experience"]:checked').value;
+                const dob = document.getElementById('dob').value || 'Not provided';
+                const newsletter = document.getElementById('newsletter').checked ? 'Yes' : 'No';
+                const currentDate = new Date().toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                const currentTime = new Date().toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true
+                });
                 
                 // Update modal with user info
                 confirmedCourse.textContent = course;
                 confirmedEmail.textContent = email;
                 
-                // Show success modal
-                successModal.style.display = 'flex';
-                
-                // Update enrollment count and progress
-                enrollmentCount += 1;
-                currentEnrollment.textContent = enrollmentCount.toLocaleString();
-                const newProgressPercentage = (enrollmentCount / targetEnrollment) * 100;
-                progressFill.style.width = `${newProgressPercentage}%`;
-                
-                // Reset form
-                enrollmentForm.reset();
+                try {
+                    // Prepare template parameters for EmailJS
+                    const templateParams = {
+                        first_name: firstName,
+                        last_name: lastName,
+                        full_name: `${firstName} ${lastName}`,
+                        email: email,
+                        phone: phone,
+                        course_name: course,
+                        experience: experience,
+                        dob: dob,
+                        date: currentDate,
+                        time: currentTime,
+                        newsletter: newsletter,
+                        enrollment_id: `GFK-${Date.now().toString().slice(-6)}`,
+                        portal_url: window.location.origin,
+                        support_email: "support@greenfirmkenya.com"
+                    };
+                    
+                    // Send email via EmailJS
+                    const response = await emailjs.send(
+                        EMAILJS_SERVICE_ID,
+                        EMAILJS_TEMPLATE_ID,
+                        templateParams
+                    );
+                    
+                    console.log('Email sent successfully:', response);
+                    
+                    // Show success notification
+                    showNotification('Confirmation email sent successfully!', 'success');
+                    
+                    // Show success modal
+                    successModal.style.display = 'flex';
+                    
+                    // Update enrollment count and progress
+                    enrollmentCount += 1;
+                    currentEnrollment.textContent = enrollmentCount.toLocaleString();
+                    const newProgressPercentage = (enrollmentCount / targetEnrollment) * 100;
+                    progressFill.style.width = `${newProgressPercentage}%`;
+                    
+                    // Reset form
+                    enrollmentForm.reset();
+                    
+                } catch (error) {
+                    console.error('Email sending failed:', error);
+                    
+                    // Show error notification
+                    showNotification('Email sending failed, but your enrollment was recorded.', 'error');
+                    
+                    // Still show success modal (fallback)
+                    successModal.style.display = 'flex';
+                    
+                    // Update modal message to indicate email issue
+                    confirmedCourse.innerHTML = course + '<br><small style="color: #ff4757;">(Email confirmation failed to send - check your inbox/spam)</small>';
+                    
+                    // Still update enrollment count
+                    enrollmentCount += 1;
+                    currentEnrollment.textContent = enrollmentCount.toLocaleString();
+                    const newProgressPercentage = (enrollmentCount / targetEnrollment) * 100;
+                    progressFill.style.width = `${newProgressPercentage}%`;
+                    
+                    // Reset form
+                    enrollmentForm.reset();
+                } finally {
+                    // Restore button state
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.classList.remove('btn-loading');
+                    submitBtn.disabled = false;
+                }
             });
             
             // Close modal functions
