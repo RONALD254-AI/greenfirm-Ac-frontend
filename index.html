@@ -2,11 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>GreenFirm Kenya Portal | Cybersecurity Training Enrollment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government of Kenya - Youth Business Startup Loan Registration</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -15,1280 +13,2111 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        :root {
-            --primary-color: #1a2332;
-            --secondary-color: #0d121c;
-            --accent-color: #2d8cff;
-            --danger-color: #ff4757;
-            --success-color: #2ed573;
-            --text-light: #646f9c;
-            --text-gray: #859fbd;
-            --card-bg: #222f3e;
-            --border-color: #34495e;
-        }
-
         body {
-            background-color: var(--primary-color);
-            color: var(--text-light);
+            background-color: #f0f2f5;
+            color: #333;
             line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            position: relative;
             overflow-x: hidden;
         }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header Styles */
-        header {
-            background-color: var(--secondary-color);
-            padding: 15px 0;
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
+        /* Watermark Background */
+        body::before {
+            content: "";
+            position: fixed;
             top: 0;
-            z-index: 100;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('image/gov.png');
+            background-repeat: repeat;
+            background-size: 300px;
+            opacity: 0.1;
+            z-index: -1;
+            pointer-events: none;
         }
 
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo-icon {
-            color: var(--accent-color);
-            font-size: 28px;
-        }
-
-        .logo-text {
-            font-size: 24px;
-            font-weight: 700;
-            background: linear-gradient(to right, var(--accent-color), #6c5ce7);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        /* Mobile Menu Toggle */
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-light);
-            font-size: 24px;
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        nav {
-            transition: all 0.3s ease;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            white-space: nowrap;
-        }
-
-        nav a:hover {
-            color: var(--accent-color);
-        }
-
-        .user-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-            white-space: nowrap;
-        }
-
-        .btn-login {
-            background-color: transparent;
-            color: var(--text-light);
-            border: 1px solid var(--border-color);
-        }
-
-        .btn-login:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .btn-primary {
-            background-color: var(--accent-color);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #1a7cff;
-            transform: translateY(-2px);
-        }
-
-        /* Loading button state */
-        .btn-loading {
-            background-color: #1a7cff;
-            cursor: not-allowed;
-            opacity: 0.8;
-        }
-
-        .btn-loading:hover {
-            transform: none;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 60px 0;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin-bottom: 20px;
-            line-height: 1.2;
-            word-wrap: break-word;
-        }
-
-        .hero p {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: var(--text-gray);
-            max-width: 700px;
-            margin: 0 auto 30px;
-            padding: 0 10px;
-        }
-
-        .highlight {
-            color: var(--accent-color);
-        }
-
-        /* Courses Section */
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: clamp(1.8rem, 4vw, 2.2rem);
-            padding: 0 10px;
-        }
-
-        .courses-section {
-            padding: 40px 0;
-        }
-
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(min(100%, 350px), 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .course-card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s, box-shadow 0.3s;
-            width: 100%;
-        }
-
-        .course-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .course-header {
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.2);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .course-icon {
-            font-size: 24px;
-            color: var(--accent-color);
-            margin-bottom: 10px;
-        }
-
-        .course-title {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            line-height: 1.3;
-        }
-
-        .course-desc {
-            color: var(--text-gray);
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-        }
-
-        .course-level {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .level-beginner {
-            background-color: rgba(46, 213, 115, 0.2);
-            color: var(--success-color);
-        }
-
-        .level-intermediate {
-            background-color: rgba(255, 165, 0, 0.2);
-            color: #ffa500;
-        }
-
-        .level-advanced {
-            background-color: rgba(255, 71, 87, 0.2);
-            color: var(--danger-color);
-        }
-
-        .course-body {
-            padding: 20px;
-        }
-
-        .course-details {
-            list-style: none;
-            margin-bottom: 20px;
-        }
-
-        .course-details li {
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .course-details li:last-child {
-            border-bottom: none;
-        }
-
-        /* Enrollment Form */
-        .enrollment-section {
-            padding: 40px 0;
-            background-color: var(--secondary-color);
-        }
-
-        .enrollment-container {
-            max-width: 800px;
+        .container {
+            max-width: 1100px;
             margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            border: 1px solid #d4d4d4;
         }
 
-        .form-card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: clamp(20px, 4vw, 40px);
-            border: 1px solid var(--border-color);
-            margin: 0 10px;
+        /* Government Header */
+        .government-header {
+            background: linear-gradient(135deg, #006b3f, #00995e);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 5px solid #ffcc00;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-placeholder {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+            border: 3px solid #ffcc00;
+            background: white;
+        }
+
+        .header-text {
+            flex-grow: 1;
+        }
+
+        .header-text h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .header-text h2 {
+            font-size: 18px;
+            font-weight: 500;
+            opacity: 0.95;
+            margin-bottom: 5px;
+        }
+
+        .header-text p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .coat-of-arms {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #ffcc00;
+        }
+
+        .coat-of-arms i {
+            font-size: 40px;
+            color: #006b3f;
+        }
+
+        /* Registration Fee Banner */
+        .fee-banner {
+            background: #ffcc00;
+            color: #006b3f;
+            padding: 12px 30px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 16px;
+            border-bottom: 2px solid #ff9900;
+        }
+
+        .fee-banner i {
+            margin-right: 10px;
+        }
+
+        .fee-amount {
+            background: #006b3f;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+
+        .progress-bar {
+            display: flex;
+            background-color: #f0f0f0;
+            padding: 0;
+            position: relative;
+        }
+
+        .progress-step {
+            flex: 1;
+            text-align: center;
+            padding: 18px 5px;
+            position: relative;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+            background: #e8e8e8;
+        }
+
+        .progress-step.active {
+            color: #006b3f;
+            background-color: #e1f5e9;
+        }
+
+        .progress-step.completed {
+            color: #006b3f;
+            background-color: #d4f1de;
+        }
+
+        .progress-step .step-number {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            border-radius: 50%;
+            background-color: #aaa;
+            color: white;
+            margin-right: 10px;
+            transition: all 0.3s;
+            font-weight: 700;
+        }
+
+        .progress-step.active .step-number {
+            background-color: #006b3f;
+            box-shadow: 0 0 0 3px rgba(0, 107, 63, 0.2);
+        }
+
+        .progress-step.completed .step-number {
+            background-color: #00995e;
+        }
+
+        .form-container {
+            padding: 30px;
+            position: relative;
+            min-height: 500px;
+        }
+
+        /* Form Watermark - Image Version */
+        .form-container {
+            padding: 30px;
+            position: relative;
+            min-height: 500px;
+            overflow: hidden;
+        }
+
+        .form-container::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(0deg);
+            width: 600px;
+            height: 600px;
+            background-image: url('image/backg.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .form-section {
+            display: none;
+            animation: fadeIn 0.5s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 22px;
+            color: #006b3f;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ffcc00;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: #00995e;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
         }
 
         .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
-            gap: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px;
+        }
+
+        .form-col {
+            flex: 1;
+            min-width: 250px;
+            padding: 0 10px;
         }
 
         label {
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
+            color: #444;
         }
 
-        .form-control {
+        .required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="number"],
+        select,
+        textarea {
             width: 100%;
-            padding: 12px 15px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            color: var(--text-light);
-            font-size: 1rem;
+            padding: 14px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: #f9f9f9;
         }
 
-        .form-control:focus {
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #006b3f;
             outline: none;
-            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(0, 107, 63, 0.1);
+            background: white;
         }
 
-        select.form-control {
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 15px center;
-            background-size: 16px;
-        }
-
-        .checkbox-group {
+        .radio-group, .checkbox-group {
             display: flex;
-            align-items: flex-start;
-            gap: 10px;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 8px;
+        }
+
+        .radio-option, .checkbox-option {
+            display: flex;
+            align-items: center;
+            background: #f9f9f9;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .radio-option:hover, .checkbox-option:hover {
+            background: #f0f0f0;
+        }
+
+        .radio-option input, .checkbox-option input {
+            margin-right: 10px;
+        }
+
+        .form-note {
+            font-size: 14px;
+            color: #666;
+            margin-top: 8px;
+            font-style: italic;
+            padding-left: 10px;
+            border-left: 3px solid #ffcc00;
+        }
+
+        .info-box {
+            background: #e8f5e9;
+            border-left: 4px solid #006b3f;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .info-box h4 {
+            color: #006b3f;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .info-box ul {
+            padding-left: 20px;
+        }
+
+        .info-box li {
+            margin-bottom: 8px;
+        }
+
+        /* ID Card Upload Section */
+        .id-upload-section {
+            background: #f8f9fa;
+            border: 2px dashed #006b3f;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 25px 0;
+        }
+
+        .id-upload-title {
+            text-align: center;
+            color: #006b3f;
+            margin-bottom: 25px;
+            font-size: 20px;
+        }
+
+        .id-upload-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+
+        .id-upload-box {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        .id-upload-box:hover {
+            border-color: #006b3f;
+            transform: translateY(-5px);
+        }
+
+        .id-upload-box.active {
+            border-color: #006b3f;
+            background: #f0fff4;
+        }
+
+        .id-side-label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .id-side-label i {
+            font-size: 24px;
+            color: #006b3f;
+            margin-right: 15px;
+        }
+
+        .id-side-label h4 {
+            color: #006b3f;
+            font-size: 18px;
+        }
+
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+            background: #fafafa;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .upload-area:hover {
+            border-color: #006b3f;
+            background: #f8fff9;
+        }
+
+        .upload-area.dragover {
+            border-color: #00995e;
+            background: #e8f5e9;
+        }
+
+        .upload-icon {
+            font-size: 50px;
+            color: #006b3f;
             margin-bottom: 15px;
         }
 
-        .checkbox-group input {
-            width: 18px;
-            height: 18px;
-            flex-shrink: 0;
-            margin-top: 3px;
-        }
-
-        .checkbox-group label {
-            margin-bottom: 0;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--secondary-color);
-            padding: 40px 0 20px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: var(--accent-color);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
+        .upload-text h5 {
+            color: #333;
             margin-bottom: 10px;
+            font-size: 16px;
         }
 
-        .footer-links a {
-            color: var(--text-gray);
-            text-decoration: none;
-            transition: color 0.3s;
-            display: inline-block;
+        .upload-text p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
         }
 
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-gray);
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        /* Modal */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .modal {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            width: 100%;
-            max-width: 500px;
-            padding: 25px;
-            border: 1px solid var(--border-color);
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .modal-title {
-            font-size: 1.3rem;
-            color: var(--accent-color);
-        }
-
-        .close-modal {
-            background: none;
+        .browse-btn {
+            background: #006b3f;
+            color: white;
             border: none;
-            color: var(--text-gray);
-            font-size: 24px;
+            padding: 10px 25px;
+            border-radius: 5px;
             cursor: pointer;
-            transition: color 0.3s;
-            flex-shrink: 0;
+            font-weight: 600;
+            transition: all 0.3s;
         }
 
-        .close-modal:hover {
-            color: var(--text-light);
+        .browse-btn:hover {
+            background: #005a35;
         }
 
-        .modal-body {
-            margin-bottom: 20px;
+        .file-input {
+            display: none;
         }
 
-        /* Progress bar */
-        .progress-container {
-            margin: 30px 0;
-            padding: 0 10px;
+        .preview-container {
+            margin-top: 20px;
+            display: none;
         }
 
-        .progress-label {
+        .preview-container.active {
+            display: block;
+        }
+
+        .preview-title {
+            color: #006b3f;
+            margin-bottom: 10px;
+            font-size: 16px;
             display: flex;
             justify-content: space-between;
-            margin-bottom: 8px;
-            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .preview-image {
+            width: 100%;
+            max-height: 250px;
+            object-fit: contain;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background: #f5f5f5;
+            padding: 10px;
+        }
+
+        .remove-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .remove-btn:hover {
+            background: #c0392b;
+        }
+
+        .file-info {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .file-info i {
+            margin-right: 8px;
+            color: #006b3f;
+        }
+
+        .id-example {
+            background: #fff8e1;
+            border: 1px solid #ffcc00;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+
+        .id-example h5 {
+            color: #996600;
+            margin-bottom: 15px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
             gap: 10px;
         }
 
-        .progress-bar {
-            height: 8px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            overflow: hidden;
+        .id-example-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .example-card {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .example-card img {
             width: 100%;
+            max-height: 150px;
+            object-fit: contain;
+            margin-bottom: 10px;
         }
 
-        .progress-fill {
-            height: 100%;
-            background-color: var(--accent-color);
-            width: 0%;
-            transition: width 1s ease-in-out;
+        .example-card p {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
         }
 
-        /* Notification */
-        .notification {
-            position: fixed;
+        /* Button Container */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 2px solid #eee;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            padding: 14px 35px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-prev {
+            background-color: #95a5a6;
+            color: white;
+        }
+
+        .btn-prev:hover {
+            background-color: #7f8c8d;
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, #006b3f, #00995e);
+            color: white;
+        }
+
+        .btn-next:hover {
+            background: linear-gradient(135deg, #005a35, #008850);
+            box-shadow: 0 5px 15px rgba(0, 107, 63, 0.3);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #ff9900, #ffcc00);
+            color: #006b3f;
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #e68a00, #ff9900);
+            box-shadow: 0 5px 15px rgba(255, 153, 0, 0.3);
+        }
+
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .payment-section {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px dashed #006b3f;
+            margin: 25px 0;
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .payment-method {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        /* Payment Action Section */
+        .payment-action-box {
+            background: linear-gradient(135deg, #f8fff9, #e8f5e9);
+            border: 2px solid #006b3f;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .payment-details {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ffcc00;
+        }
+
+        .payment-details p {
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        .payment-details strong {
+            color: #006b3f;
+            min-width: 80px;
+            display: inline-block;
+        }
+
+        /* Pay Now Button */
+        .pay-now-btn {
+            background: linear-gradient(135deg, #00a862, #00a86b);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 15px 0;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 4px 15px rgba(0, 168, 107, 0.3);
+        }
+
+        .pay-now-btn:hover {
+            background: linear-gradient(135deg, #009955, #00995e);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 168, 107, 0.4);
+        }
+
+        .pay-now-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .pay-now-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .pay-now-btn i {
+            font-size: 20px;
+        }
+
+        .payment-note {
+            color: #666;
+            font-size: 14px;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* Payment Info Box */
+        .payment-info-box {
+            background: #fff8e1;
+            border: 1px solid #ffcc00;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .payment-instructions {
+            padding-left: 20px;
+        }
+
+        .payment-instructions li {
+            margin-bottom: 10px;
+            padding-left: 5px;
+        }
+
+        /* Loading animation */
+        .payment-loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .payment-loading .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #006b3f;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .payment-method:hover {
+            border-color: #006b3f;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-method.selected {
+            border-color: #006b3f;
+            background: #e8f5e9;
+        }
+
+        .payment-method i {
+            font-size: 40px;
+            color: #006b3f;
+            margin-bottom: 15px;
+        }
+
+        .summary-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #006b3f;
+        }
+
+        .summary-label {
+            font-weight: 700;
+            color: #006b3f;
+            margin-bottom: 10px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-value {
+            color: #333;
+            padding-left: 25px;
+        }
+
+        .stamp {
+            position: absolute;
             top: 20px;
             right: 20px;
-            padding: 15px 20px;
-            border-radius: 4px;
-            color: white;
-            font-weight: 600;
-            z-index: 2000;
-            opacity: 0;
-            transform: translateX(100%);
-            transition: all 0.3s ease;
-            max-width: 300px;
+            transform: rotate(15deg);
+            opacity: 0.8;
         }
 
-        .notification.show {
-            opacity: 1;
-            transform: translateX(0);
+        .stamp-content {
+            padding: 15px 25px;
+            background: #ffcc00;
+            color: #006b3f;
+            font-weight: 900;
+            font-size: 18px;
+            border: 3px solid #006b3f;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .notification.success {
-            background-color: var(--success-color);
-            border-left: 4px solid #1e8e4a;
+        /* Validation Messages */
+        .validation-message {
+            display: none;
+            background: #ffeaa7;
+            border-left: 4px solid #fdcb6e;
+            padding: 10px 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            font-size: 14px;
         }
 
-        .notification.error {
-            background-color: var(--danger-color);
-            border-left: 4px solid #d63047;
+        .validation-message.active {
+            display: block;
         }
 
-        .notification.info {
-            background-color: var(--accent-color);
-            border-left: 4px solid #1a7cff;
+        .validation-message.error {
+            background: #ffcccc;
+            border-left-color: #e74c3c;
         }
 
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .header-content {
-                justify-content: center;
-            }
-            
-            .logo-text {
-                font-size: 20px;
-            }
+        .validation-message.success {
+            background: #d4edda;
+            border-left-color: #28a745;
         }
 
         @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
+            .government-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
             }
             
-            nav {
-                width: 100%;
-                max-height: 0;
-                overflow: hidden;
-                order: 3;
+            .form-col {
+                min-width: 100%;
             }
             
-            nav.active {
-                max-height: 500px;
-                margin-top: 15px;
+            .progress-step .step-text {
+                display: none;
             }
             
-            nav ul {
+            .progress-step .step-number {
+                margin-right: 0;
+            }
+            
+            .id-upload-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-container {
                 flex-direction: column;
                 gap: 15px;
-                width: 100%;
-                text-align: center;
             }
             
-            nav a {
-                justify-content: center;
-                padding: 10px;
-                border-radius: 4px;
-                background-color: rgba(255, 255, 255, 0.05);
-            }
-            
-            .user-actions {
+            .btn {
                 width: 100%;
                 justify-content: center;
-                order: 2;
             }
             
-            .hero {
-                padding: 40px 0;
+            .form-container::before {
+                font-size: 40px;
+                transform: translate(-50%, -50%) rotate(-30deg);
             }
             
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .btn {
-                padding: 10px 15px;
-                font-size: 0.9rem;
-            }
-            
-            .courses-section {
-                padding: 30px 0;
-            }
-            
-            .course-card {
-                margin: 0 auto;
-                max-width: 100%;
-            }
-            
-            .enrollment-section {
-                padding: 30px 0;
-            }
-            
-            .form-card {
-                padding: 20px;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-            
-            .progress-label {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 5px;
-            }
-
-            .notification {
-                top: 10px;
-                right: 10px;
-                left: 10px;
-                max-width: none;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
-            }
-            
-            .logo {
-                gap: 5px;
-            }
-            
-            .logo-icon {
-                font-size: 22px;
-            }
-            
-            .logo-text {
-                font-size: 18px;
-            }
-            
-            .btn {
-                padding: 8px 12px;
-                font-size: 0.85rem;
-            }
-            
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .section-title {
-                font-size: 1.6rem;
-            }
-            
-            .course-title {
-                font-size: 1.2rem;
-            }
-            
-            .course-details li {
-                flex-direction: column;
-                gap: 5px;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            
-            .modal {
-                padding: 20px;
-            }
-            
-            .modal-title {
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (max-width: 320px) {
-            .container {
-                padding: 0 10px;
-            }
-            
-            .logo-text {
-                font-size: 16px;
-            }
-            
-            .btn {
-                padding: 6px 10px;
-                font-size: 0.8rem;
-            }
-            
-            .hero h1 {
-                font-size: 1.5rem;
-            }
-        }
-
-        /* Touch device optimizations */
-        @media (hover: none) and (pointer: coarse) {
-            .btn:hover {
-                transform: none;
-            }
-            
-            .course-card:hover {
-                transform: none;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            }
-            
-            .btn-primary:active {
-                transform: scale(0.98);
+            .payment-method {
+                min-width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Notification Area -->
-    <div id="notificationArea"></div>
-
-    <!-- Header -->
-    <header>
-        <div class="container header-content">
-            <div class="logo">
-                <i class="fas fa-shield-alt logo-icon"></i>
-                <div class="logo-text">GreenFirm Kenya</div>
-            </div>
-            
-            <button class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            
-            <nav id="mainNav">
-                <ul>
-                    <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="#courses"><i class="fas fa-graduation-cap"></i> Courses</a></li>
-                    <li><a href="#enroll"><i class="fas fa-user-plus"></i> Enroll</a></li>
-                    <li><a href="#"><i class="fas fa-trophy"></i> Challenges</a></li>
-                    <li><a href="#"><i class="fas fa-question-circle"></i> Support</a></li>
-                </ul>
-            </nav>
-            
-            <div class="user-actions">
-                <a href="#" class="btn btn-login">Log In</a>
-                <a href="#enroll" class="btn btn-primary">Sign Up</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Launch Your Career in <span class="highlight">Cybersecurity</span></h1>
-            <p>Join thousands of students learning practical cybersecurity skills through hands-on labs, real-world scenarios, and expert-led courses.</p>
-            <a href="#enroll" class="btn btn-primary" style="padding: clamp(12px, 2vw, 15px) clamp(20px, 3vw, 30px); font-size: clamp(1rem, 2vw, 1.1rem); margin-bottom: 30px;">
-                <i class="fas fa-rocket"></i> Start Learning Now
-            </a>
-            
-            <div class="progress-container">
-                <div class="progress-label">
-                    <span>Current Enrollment: <strong id="currentEnrollment">1,847</strong> students</span>
-                    <span>Monthly Goal: 2,500 students</span>
+    <div class="container">
+        <!-- Government Header with Logos -->
+        <div class="government-header">
+            <div class="logo-section">
+                <div class="logo-placeholder">
+                    <img src="image/govn.png" alt="Kenya Government Logo" class="logo-image">
                 </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="enrollmentProgress"></div>
+                <div class="header-text">
+                    <h1>GOVERNMENT OF KENYA</h1>
+                    <h2>MINISTRY OF YOUTH AFFAIRS & ENTREPRENEURSHIP</h2>
+                    <p>Youth Business Startup Loan Program - Registration Portal</p>
                 </div>
             </div>
+            <div class="logo-placeholder">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Kenya.svg/1200px-Flag_of_Kenya.svg.png" alt="Kenya Government Logo" class="logo-image">
+            </div>
         </div>
-    </section>
-
-    <!-- Courses Section -->
-    <section id="courses" class="courses-section">
-        <div class="container">
-            <h2 class="section-title">Cybersecurity <span class="highlight">Courses</span></h2>
-            <div class="courses-grid">
-                <!-- Course 1 -->
-                <div class="course-card">
-                    <div class="course-header">
-                        <div class="course-icon">
-                            <i class="fas fa-user-secret"></i>
+        
+        <!-- Registration Fee Banner -->
+        <div class="fee-banner">
+            REGISTER ! REGISTER ! REGISTER! (For New Applicants Only)
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-step active" id="step1">
+                <span class="step-number">1</span>
+                <span class="step-text">Eligibility Check</span>
+            </div>
+            <div class="progress-step" id="step2">
+                <span class="step-number">2</span>
+                <span class="step-text">Personal Details</span>
+            </div>
+            <div class="progress-step" id="step3">
+                <span class="step-number">3</span>
+                <span class="step-text">ID Upload</span>
+            </div>
+            <div class="progress-step" id="step4">
+                <span class="step-number">4</span>
+                <span class="step-text">Business Plan</span>
+            </div>
+            <div class="progress-step" id="step5">
+                <span class="step-number">5</span>
+                <span class="step-text">Payment & Submit</span>
+            </div>
+        </div>
+        
+        <!-- Form Container -->
+        <div class="form-container">
+            <!-- Section 1: Eligibility Check -->
+            <div class="form-section active" id="section1">
+                <h2 class="section-title">Step 1: Eligibility Verification</h2>
+                
+                <div class="info-box">
+                    <h4><i class="fas fa-info-circle"></i> ELIGIBILITY CRITERIA:</h4>
+                    <ul>
+                        <li>Must be a Kenyan citizen aged 18-35 years</li>
+                        <li>Currently unemployed or underemployed</li>
+                        <li>Have a valid National ID</li>
+                        <li>No existing government loan default</li>
+                        <li>Willing to undergo entrepreneurship training</li>
+                    </ul>
+                </div>
+                
+                <div class="form-group">
+                    <label for="nationalId" class="required">National ID Number</label>
+                    <input type="text" id="nationalId" placeholder="Enter your Kenyan National ID (e.g., 12345678)" pattern="[0-9]{8,10}" maxlength="10">
+                    <div class="form-note">Format: 8-10 digits (e.g., 12345678)</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="age" class="required">Age</label>
+                    <input type="number" id="age" min="18" max="35" placeholder="Enter your age">
+                    <div class="form-note">Must be between 18 and 35 years</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="required">Employment Status</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="unemployed" name="employment" value="unemployed" checked>
+                            <label for="unemployed">Unemployed</label>
                         </div>
-                        <h3 class="course-title">Ethical Hacking Fundamentals</h3>
-                        <p class="course-desc">Learn the basics of penetration testing and ethical hacking methodologies.</p>
-                        <span class="course-level level-beginner">Beginner</span>
-                    </div>
-                    <div class="course-body">
-                        <ul class="course-details">
-                            <li><span>Duration:</span> 8 weeks</li>
-                            <li><span>Modules:</span> 12</li>
-                            <li><span>Hands-on Labs:</span> 25+</li>
-                            <li><span>Prerequisites:</span> None</li>
-                        </ul>
-                        <button class="btn btn-primary enroll-btn" data-course="Ethical Hacking Fundamentals" style="width: 100%;">Enroll Now</button>
+                        <div class="radio-option">
+                            <input type="radio" id="underemployed" name="employment" value="underemployed">
+                            <label for="underemployed">Underemployed</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="selfEmployed" name="employment" value="selfEmployed">
+                            <label for="selfEmployed">Self-Employed (Informal)</label>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Course 2 -->
-                <div class="course-card">
-                    <div class="course-header">
-                        <div class="course-icon">
-                            <i class="fas fa-network-wired"></i>
+                <div class="form-group">
+                    <label class="required">Do you have any existing government loan?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="loanNo" name="existingLoan" value="no" checked>
+                            <label for="loanNo">No</label>
                         </div>
-                        <h3 class="course-title">Network Security & Defense</h3>
-                        <p class="course-desc">Master network security concepts, firewall configuration, and intrusion detection.</p>
-                        <span class="course-level level-intermediate">Intermediate</span>
-                    </div>
-                    <div class="course-body">
-                        <ul class="course-details">
-                            <li><span>Duration:</span> 10 weeks</li>
-                            <li><span>Modules:</span> 15</li>
-                            <li><span>Hands-on Labs:</span> 30+</li>
-                            <li><span>Prerequisites:</span> Basic Networking</li>
-                        </ul>
-                        <button class="btn btn-primary enroll-btn" data-course="Network Security & Defense" style="width: 100%;">Enroll Now</button>
+                        <div class="radio-option">
+                            <input type="radio" id="loanYes" name="existingLoan" value="yes">
+                            <label for="loanYes">Yes</label>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Course 3 -->
-                <div class="course-card">
-                    <div class="course-header">
-                        <div class="course-icon">
-                            <i class="fas fa-bug"></i>
+                <div class="form-group">
+                    <label class="required">Are you willing to attend mandatory entrepreneurship training?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="trainingYes" name="training" value="yes" checked>
+                            <label for="trainingYes">Yes, I'm willing</label>
                         </div>
-                        <h3 class="course-title">Malware Analysis & Reverse Engineering</h3>
-                        <p class="course-desc">Learn to analyze malicious software and understand how it operates.</p>
-                        <span class="course-level level-advanced">Advanced</span>
-                    </div>
-                    <div class="course-body">
-                        <ul class="course-details">
-                            <li><span>Duration:</span> 12 weeks</li>
-                            <li><span>Modules:</span> 18</li>
-                            <li><span>Hands-on Labs:</span> 35+</li>
-                            <li><span>Prerequisites:</span> Programming Knowledge</li>
-                        </ul>
-                        <button class="btn btn-primary enroll-btn" data-course="Malware Analysis & Reverse Engineering" style="width: 100%;">Enroll Now</button>
+                        <div class="radio-option">
+                            <input type="radio" id="trainingNo" name="training" value="no">
+                            <label for="trainingNo">No</label>
+                        </div>
                     </div>
                 </div>
+                
+                <div class="button-container">
+                    <div></div>
+                    <button class="btn btn-next" onclick="nextSection()">Check Eligibility <i class="fas fa-arrow-right"></i></button>
+                </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Enrollment Form -->
-    <section id="enroll" class="enrollment-section">
-        <div class="container enrollment-container">
-            <h2 class="section-title">Student <span class="highlight">Enrollment</span></h2>
-            <div class="form-card">
-                <form id="enrollmentForm">
+            
+            <!-- Section 2: Personal Details -->
+            <div class="form-section" id="section2">
+                <h2 class="section-title">Step 2: Personal Information</h2>
+                
+                <div class="form-group">
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="firstName">First Name *</label>
-                            <input type="text" id="firstName" class="form-control" required>
+                        <div class="form-col">
+                            <label for="firstName" class="required">First Name</label>
+                            <input type="text" id="firstName" placeholder="As per National ID">
                         </div>
-                        <div class="form-group">
-                            <label for="lastName">Last Name *</label>
-                            <input type="text" id="lastName" class="form-control" required>
+                        <div class="form-col">
+                            <label for="lastName" class="required">Last Name</label>
+                            <input type="text" id="lastName" placeholder="As per National ID">
                         </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" class="form-control" required>
-                    </div>
-                    
+                </div>
+                
+                <div class="form-group">
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" class="form-control">
+                        <div class="form-col">
+                            <label for="dateOfBirth" class="required">Date of Birth</label>
+                            <input type="date" id="dateOfBirth">
                         </div>
-                        <div class="form-group">
-                            <label for="dob">Date of Birth</label>
-                            <input type="date" id="dob" class="form-control">
+                        <div class="form-col">
+                            <label for="gender" class="required">Gender</label>
+                            <select id="gender">
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
                         </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="courseSelect">Select Course *</label>
-                        <select id="courseSelect" class="form-control" required>
-                            <option value="">-- Choose a course --</option>
-                            <option value="Ethical Hacking Fundamentals">Ethical Hacking Fundamentals</option>
-                            <option value="Network Security & Defense">Network Security & Defense</option>
-                            <option value="Malware Analysis & Reverse Engineering">Malware Analysis & Reverse Engineering</option>
-                            <option value="Digital Forensics">Digital Forensics</option>
-                            <option value="Cloud Security">Cloud Security</option>
-                            <option value="Graphic and Design">Graphics and Design</option>
-                            <option value="Web Design">Web Design</option>
-
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Previous Experience Level</label>
-                        <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px;">
-                            <div class="checkbox-group">
-                                <input type="radio" id="exp-none" name="experience" value="None" checked>
-                                <label for="exp-none">None (Beginner)</label>
-                            </div>
-                            <div class="checkbox-group">
-                                <input type="radio" id="exp-some" name="experience" value="Some">
-                                <label for="exp-some">Some Experience</label>
-                            </div>
-                            <div class="checkbox-group">
-                                <input type="radio" id="exp-advanced" name="experience" value="Advanced">
-                                <label for="exp-advanced">Advanced</label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="terms" required>
-                        <label for="terms">I agree to the <a href="#" style="color: var(--accent-color);">Terms & Conditions</a> and understand the course requirements *</label>
-                    </div>
-                    
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="newsletter">
-                        <label for="newsletter">Subscribe to cybersecurity updates and course announcements</label>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary" id="submitBtn" style="width: 100%; padding: 15px; font-size: 1.1rem; margin-top: 20px;">
-                        Submit Enrollment Application
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Greenfirm Kenya</h3>
-                    <p style="color: var(--text-gray);">Providing hands-on cybersecurity education to students worldwide since 2020.</p>
-                    <div style="display: flex; gap: 15px; margin-top: 20px; justify-content: center;">
-                        <a href="#" style="color: var(--text-gray); font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="color: var(--text-gray); font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" style="color: var(--text-gray); font-size: 1.2rem;"><i class="fab fa-github"></i></a>
-                        <a href="#" style="color: var(--text-gray); font-size: 1.2rem;"><i class="fab fa-discord"></i></a>
                     </div>
                 </div>
                 
-                <div class="footer-column">
-                    <h3>Courses</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Ethical Hacking</a></li>
-                        <li><a href="#">Network Security</a></li>
-                        <li><a href="#">Malware Analysis</a></li>
-                        <li><a href="#">Digital Forensics</a></li>
-                        <li><a href="#">Cloud Security</a></li>
-                        <li><a href="#">Graphics and Design</a></li>
-                        <li><a href="#">Web Design</a></li>
-                    </ul>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="email" class="required">Email Address</label>
+                            <input type="email" id="email" placeholder="official email address">
+                        </div>
+                        <div class="form-col">
+                            <label for="phone" class="required">Phone Number</label>
+                            <input type="tel" id="phone" placeholder="07XX XXX XXX" pattern="[0-9]{10}" maxlength="10">
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="footer-column">
-                    <h3>Resources</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Learning Paths</a></li>
-                        <li><a href="#">Practice Labs</a></li>
-                        <li><a href="#">CTF Challenges</a></li>
-                        <li><a href="#">Career Guide</a></li>
-                        <li><a href="#">Blog</a></li>
-                    </ul>
+                <div class="form-group">
+                    <label for="county" class="required">County of Residence</label>
+                    <select id="county">
+                        <option value="">Select County</option>
+                        <option value="nairobi">Nairobi</option>
+                        <option value="mombasa">Mombasa</option>
+                        <option value="kisumu">Kisumu</option>
+                        <option value="nakuru">Nakuru</option>
+                        <option value="uasingishu">Uasin Gishu</option>
+                        <option value="kakamega">Kakamega</option>
+                        <option value="bomet">Bomet</option>
+                        <option value="other">Other Counties</option>
+                    </select>
                 </div>
                 
-                <div class="footer-column">
-                    <h3>Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">System Status</a></li>
-                        <li><a href="#">Report Issue</a></li>
-                    </ul>
+                <div class="form-group">
+                    <label for="address" class="required">Physical Address</label>
+                    <input type="text" id="address" placeholder="Enter your full address">
+                </div>
+                
+                <div class="form-group">
+                    <label for="education" class="required">Highest Education Level</label>
+                    <select id="education">
+                        <option value="">Select Education Level</option>
+                        <option value="primary">Primary School</option>
+                        <option value="secondary">Secondary School</option>
+                        <option value="certificate">Certificate</option>
+                        <option value="diploma">Diploma</option>
+                        <option value="degree">Degree</option>
+                        <option value="higher">Higher Degree</option>
+                    </select>
+                </div>
+                
+                <div class="button-container">
+                    <button class="btn btn-prev" onclick="prevSection()"><i class="fas fa-arrow-left"></i> Previous</button>
+                    <button class="btn btn-next" onclick="nextSection()">Next <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
             
-            <div class="copyright">
-                &copy; 2023 Greenfirm Kenya Portal. All rights reserved. | Designed for cybersecurity education
-            </div>
-        </div>
-    </footer>
-
-    <!-- Enrollment Success Modal -->
-    <div class="modal-overlay" id="successModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 class="modal-title"><i class="fas fa-check-circle" style="color: var(--success-color); margin-right: 10px;"></i> Enrollment Successful!</h3>
-                <button class="close-modal" id="closeModal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Thank you for your enrollment application to <strong id="confirmedCourse"></strong>.</p>
-                <p>We have sent a confirmation email with further instructions to <strong id="confirmedEmail"></strong>.</p>
-                <p>Our admissions team will review your application and email you within 2 business days.</p>
-                <div style="background-color: rgba(46, 213, 115, 0.1); padding: 15px; border-radius: 4px; margin-top: 20px; border-left: 4px solid var(--success-color);">
-                    <p><strong>Next Steps:</strong></p>
-                    <ol style="margin-left: 20px; margin-top: 10px;">
-                        <li>Check your email (and spam folder) for the confirmation</li>
-                        <li>Complete your student profile</li>
-                        <li>Access the introductory materials</li>
-                    </ol>
+            <!-- Section 3: ID Card Upload -->
+            <div class="form-section" id="section3">
+                <h2 class="section-title">Step 3: National ID Card Upload</h2>
+                
+                <div class="info-box">
+                    <h4><i class="fas fa-camera"></i> IMPORTANT UPLOAD INSTRUCTIONS:</h4>
+                    <ul>
+                        <li>Upload CLEAR photos of BOTH sides of your National ID</li>
+                        <li>File format: JPG, JPEG, or PNG only</li>
+                        <li>Maximum file size: 2MB per image</li>
+                        <li>Ensure all text is clearly visible and readable</li>
+                        <li>No glare, shadows, or blurry images accepted</li>
+                    </ul>
+                </div>
+                
+                <div class="id-upload-section">
+                    <div class="id-upload-title">
+                        <h3>Upload Front and Back of Your National ID Card</h3>
+                        <p class="form-note" style="text-align: center; margin-top: 10px;">Both sides are mandatory for verification</p>
+                    </div>
+                    
+                    <div class="id-upload-grid">
+                        <!-- Front ID Upload -->
+                        <div class="id-upload-box" id="frontIdBox">
+                            <div class="id-side-label">
+                                <i class="fas fa-id-card"></i>
+                                <h4>FRONT SIDE OF NATIONAL ID</h4>
+                            </div>
+                            
+                            <div class="upload-area" id="frontUploadArea" onclick="triggerFileInput('front')" ondragover="handleDragOver(event, 'front')" ondragleave="handleDragLeave(event, 'front')" ondrop="handleDrop(event, 'front')">
+                                <div class="upload-icon">
+                                    <i class="fas fa-file-upload"></i>
+                                </div>
+                                <div class="upload-text">
+                                    <h5>Upload Front Side</h5>
+                                    <p>Click to browse or drag & drop image file</p>
+                                    <button class="browse-btn">Browse Files</button>
+                                </div>
+                            </div>
+                            
+                            <input type="file" id="frontIdInput" class="file-input" accept=".jpg,.jpeg,.png" onchange="handleFileSelect(event, 'front')">
+                            
+                            <div class="preview-container" id="frontPreview">
+                                <div class="preview-title">
+                                    <span>Front ID Preview</span>
+                                    <button class="remove-btn" onclick="removeFile('front')">Remove</button>
+                                </div>
+                                <img id="frontPreviewImage" class="preview-image" alt="Front ID Preview">
+                                <div class="file-info" id="frontFileInfo"></div>
+                            </div>
+                            
+                            <div class="validation-message" id="frontValidation">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <span id="frontValidationText">Please upload the front side of your National ID</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Back ID Upload -->
+                        <div class="id-upload-box" id="backIdBox">
+                            <div class="id-side-label">
+                                <i class="fas fa-id-card"></i>
+                                <h4>BACK SIDE OF NATIONAL ID</h4>
+                            </div>
+                            
+                            <div class="upload-area" id="backUploadArea" onclick="triggerFileInput('back')" ondragover="handleDragOver(event, 'back')" ondragleave="handleDragLeave(event, 'back')" ondrop="handleDrop(event, 'back')">
+                                <div class="upload-icon">
+                                    <i class="fas fa-file-upload"></i>
+                                </div>
+                                <div class="upload-text">
+                                    <h5>Upload Back Side</h5>
+                                    <p>Click to browse or drag & drop image file</p>
+                                    <button class="browse-btn">Browse Files</button>
+                                </div>
+                            </div>
+                            
+                            <input type="file" id="backIdInput" class="file-input" accept=".jpg,.jpeg,.png" onchange="handleFileSelect(event, 'back')">
+                            
+                            <div class="preview-container" id="backPreview">
+                                <div class="preview-title">
+                                    <span>Back ID Preview</span>
+                                    <button class="remove-btn" onclick="removeFile('back')">Remove</button>
+                                </div>
+                                <img id="backPreviewImage" class="preview-image" alt="Back ID Preview">
+                                <div class="file-info" id="backFileInfo"></div>
+                            </div>
+                            
+                            <div class="validation-message" id="backValidation">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <span id="backValidationText">Please upload the back side of your National ID</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ID Example -->
+                    <div class="id-example">
+                        <h5><i class="fas fa-lightbulb"></i> CORRECT WAY TO CAPTURE YOUR NATIONAL ID:</h5>
+                        <div class="id-example-content">
+                            <div class="example-card">
+                                <div style="background: #f0f0f0; padding: 20px; border-radius: 5px; text-align: center; min-height: 150px; display: flex; align-items: center; justify-content: center;">
+                                    <div style="text-align: center;">
+                                        <i class="fas fa-id-card" style="font-size: 50px; color: #006b3f; margin-bottom: 10px;"></i>
+                                        <p style="color: #006b3f; font-weight: bold;">Front Side Example</p>
+                                    </div>
+                                </div>
+                                <p>Shows: Photo, Name, ID Number, Date of Birth</p>
+                            </div>
+                            <div class="example-card">
+                                <div style="background: #f0f0f0; padding: 20px; border-radius: 5px; text-align: center; min-height: 150px; display: flex; align-items: center; justify-content: center;">
+                                    <div style="text-align: center;">
+                                        <i class="fas fa-id-card" style="font-size: 50px; color: #006b3f; margin-bottom: 10px;"></i>
+                                        <p style="color: #006b3f; font-weight: bold;">Back Side Example</p>
+                                    </div>
+                                </div>
+                                <p>Shows: Signature, Issue Date, Barcode</p>
+                            </div>
+                            <div class="example-card">
+                                <div style="background: #e8f5e9; padding: 20px; border-radius: 5px; text-align: center; min-height: 150px; display: flex; align-items: center; justify-content: center;">
+                                    <div style="text-align: center;">
+                                        <i class="fas fa-check-circle" style="font-size: 50px; color: #28a745; margin-bottom: 10px;"></i>
+                                        <p style="color: #28a745; font-weight: bold;">Tips for Good Photos</p>
+                                    </div>
+                                </div>
+                                <p>• Good lighting<br>• Flat surface<br>• No glare<br>• All corners visible</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="button-container">
+                    <button class="btn btn-prev" onclick="prevSection()"><i class="fas fa-arrow-left"></i> Previous</button>
+                    <button class="btn btn-next" onclick="nextSection()">Next <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
-            <div style="text-align: center;">
-                <button class="btn btn-primary" id="closeModalBtn">Continue to Dashboard</button>
+            
+            <!-- Section 4: Business Plan -->
+            <div class="form-section" id="section4">
+                <h2 class="section-title">Step 4: Business Proposal</h2>
+                
+                <div class="info-box">
+                    <h4><i class="fas fa-lightbulb"></i> BUSINESS IDEA GUIDELINES:</h4>
+                    <ul>
+                        <li>Maximum loan amount: KSH 15,000</li>
+                        <li>Repayment period: 24-36 months</li>
+                        <li>Interest rate: 5% per annum (Government Subsidized)</li>
+                        <li>Must create at least 1 additional job</li>
+                        <li>Business must be registered within 3 months</li>
+                    </ul>
+                </div>
+                
+                <div class="form-group">
+                    <label for="businessType" class="required">Type of Business</label>
+                    <select id="businessType">
+                        <option value="">Select Business Type</option>
+                        <option value="agriculture">Agriculture & Agri-business</option>
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="retail">Retail & Wholesale</option>
+                        <option value="services">Service Industry</option>
+                        <option value="technology">Technology & Innovation</option>
+                        <option value="tourism">Tourism & Hospitality</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="businessName" class="required">Proposed Business Name</label>
+                    <input type="text" id="businessName" placeholder="Enter proposed business name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="loanAmount" class="required">Loan Amount Requested (KSH)</label>
+                    <input type="number" id="loanAmount" min="1000" max="15000" step="1000" placeholder="Enter amount between 1,000 - 15,000">
+                    <div class="form-note">Minimum: KSH 1,000 | Maximum: KSH 15,000</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="jobsCreated" class="required">Number of Jobs to be Created</label>
+                    <input type="number" id="jobsCreated" min="1" max="10" placeholder="Minimum 1 job">
+                </div>
+                
+                <div class="form-group">
+                    <label for="businessPlan" class="required">Brief Business Description</label>
+                    <textarea id="businessPlan" rows="6" placeholder="Describe your business idea, target market, and how you plan to succeed..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="experience" class="required">Do you have any business experience?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="experienceYes" name="experience" value="yes">
+                            <label for="experienceYes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="experienceNo" name="experience" value="no" checked>
+                            <label for="experienceNo">No</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="button-container">
+                    <button class="btn btn-prev" onclick="prevSection()"><i class="fas fa-arrow-left"></i> Previous</button>
+                    <button class="btn btn-next" onclick="nextSection()">Next <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+            
+            <!-- Section 5: Payment & Review -->
+            <div class="form-section" id="section5">
+                <h2 class="section-title">Step 5: Payment & Final Submission</h2>
+                
+                <div class="payment-section">
+                    <h3 style="color: #006b3f; margin-bottom: 20px;">Registration Fee Payment</h3>
+                    <p style="margin-bottom: 20px;">Complete your registration by paying the KSH 100 registration fee through any of the following methods:</p>
+                    
+                    <div class="payment-methods">
+                        <div class="payment-method" onclick="selectPayment('bank')">
+                            <i class="fas fa-university"></i>
+                            <h4>Deposit</h4>
+                        </div>
+                    </div>
+
+                    <!-- Payment Action Button (Shown only when M-PESA is selected) -->
+                    <div id="paymentActionSection" style="display: none; margin-top: 20px;">
+                        <div class="payment-action-box">
+                            <h4 style="color: #006b3f; margin-bottom: 15px;">
+                                <i class="fab fa-mpesa"></i> Complete M-PESA Payment
+                            </h4>
+                            <div class="payment-details">
+                                <p><strong>Amount:</strong> KSH 100</p>
+                                <p><strong>Account:</strong> <span id="paymentAccountNumber">${document.getElementById('nationalId').value}</span></p>
+                            </div>
+                            <button id="payNowBtn" class="pay-now-btn" onclick="window.location.href='payment.html'">
+                                <i class="fas fa-lock"></i> Pay KSH 100 via M-PESA
+                            </button>
+                            <p class="payment-note">
+                                <i class="fas fa-info-circle"></i> You will be redirected to M-PESA to complete payment
+                            </p>
+                        </div>
+                        
+                        <!-- Alternative Payment Info (for other methods) -->
+                        <div id="alternativePaymentInfo" style="display: none;">
+                            <div class="payment-info-box">
+                                <h5 style="color: #006b3f; margin-bottom: 10px;">Payment Instructions:</h5>
+                                <div id="paymentInstructions"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 25px;">
+                        <label for="transactionId" class="required">Transaction ID / Reference Number</label>
+                        <input type="text" id="transactionId" placeholder="Enter your payment reference number">
+                        <div class="form-note">Enter the M-PESA transaction code or bank reference number</div>
+                    </div>
+                
+                <div id="summaryContent">
+                    <!-- Summary will be populated here -->
+                </div>
+                
+                <!-- ID Upload Summary -->
+                <div class="summary-item" id="idUploadSummary" style="display: none;">
+                    <div class="summary-label"><i class="fas fa-id-card"></i> ID Card Upload Status</div>
+                    <div class="summary-value" id="idUploadStatus"></div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="checkbox-option" style="background: #f0f0f0; padding: 15px; border-radius: 5px;">
+                        <input type="checkbox" id="declaration" required>
+                        <label for="declaration" class="required">
+                            <strong>I hereby declare that:</strong>
+                        </label>
+                        <div style="margin-left: 25px; margin-top: 10px;">
+                            <p>1. All information provided is true and accurate</p>
+                            <p>2. The uploaded ID cards are authentic and belong to me</p>
+                            <p>3. I understand that false information may lead to disqualification</p>
+                            <p>4. I agree to the terms and conditions of the loan program</p>
+                            <p>5. I consent to verification of all provided information</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="button-container">
+                    <button class="btn btn-prev" onclick="prevSection()"><i class="fas fa-arrow-left"></i> Previous</button>
+                    <button class="btn btn-submit" onclick="submitForm()"><i class="fas fa-paper-plane"></i> Submit Application</button>
+                </div>
+                
+                <!-- Official Stamp -->
+                <div class="stamp">
+                    <div class="stamp-content">
+                        Official
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Success Message -->
+            <div id="successMessage" style="display: none; text-align: center; padding: 40px 20px;">
+                <div style="font-size: 80px; color: #00995e; margin-bottom: 20px;">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2 style="color: #006b3f; margin-bottom: 15px; font-size: 28px;">APPLICATION SUBMITTED SUCCESSFULLY!</h2>
+                <p style="font-size: 18px; color: #555; margin-bottom: 15px;">Your registration for the Youth Business Startup Loan has been received.</p>
+                <p style="font-size: 16px; color: #666; margin-bottom: 30px;">
+                    <strong>Application Reference:</strong> <span id="referenceNumber" style="color: #006b3f; font-weight: bold;">KEN/GOV/YBL/2024/XXXXXX</span>
+                </p>
+                <div style="background: #e8f5e9; padding: 20px; border-radius: 8px; margin-bottom: 30px; text-align: left;">
+                    <h4 style="color: #006b3f; margin-bottom: 10px;">Next Steps:</h4>
+                    <ul style="padding-left: 20px;">
+                        <li>You will receive an SMS confirmation within 24 hours</li>
+                        <li>Keep your transaction ID for future reference</li>
+                        <li>Eligibility assessment will be completed in 5-7 working days</li>
+                        <li>Successful applicants will be contacted for training schedule</li>
+                        <li>Your ID documents will be verified within 48 hours</li>
+                    </ul>
+                </div>
+                <button class="btn" onclick="resetForm()" style="background: linear-gradient(135deg, #006b3f, #00995e); color: white;">
+                    <i class="fas fa-plus-circle"></i> New Application
+                </button>
             </div>
         </div>
     </div>
 
     <script>
-        // Initialize EmailJS with your Public Key
-        // REPLACE THIS WITH YOUR ACTUAL EMAILJS PUBLIC KEY
-        emailjs.init("EdGq_p0nzQbdGvLrW");
+        let currentSection = 1;
+        const totalSections = 5;
+        let selectedPaymentMethod = '';
+        let idFiles = {
+            front: null,
+            back: null
+        };
         
-        // EmailJS Configuration
-        const EMAILJS_SERVICE_ID = "service_aw7h7zm";
-        const EMAILJS_TEMPLATE_ID = "template_gqfpt2o";
-
-        // Notification system
-        function showNotification(message, type = "success") {
-            const notificationArea = document.getElementById('notificationArea');
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.innerHTML = `
-                <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
-                <span style="margin-left: 10px;">${message}</span>
+        function updateProgressBar() {
+            for (let i = 1; i <= totalSections; i++) {
+                const step = document.getElementById(`step${i}`);
+                step.classList.remove('active', 'completed');
+                
+                if (i < currentSection) {
+                    step.classList.add('completed');
+                }
+            }
+            
+            document.getElementById(`step${currentSection}`).classList.add('active');
+        }
+        
+        function showSection(sectionNumber) {
+            for (let i = 1; i <= totalSections; i++) {
+                document.getElementById(`section${i}`).classList.remove('active');
+            }
+            
+            document.getElementById(`section${sectionNumber}`).classList.add('active');
+            updateProgressBar();
+            
+            if (sectionNumber === totalSections) {
+                populateSummary();
+            }
+        }
+        
+        function nextSection() {
+            if (validateCurrentSection()) {
+                if (currentSection === 1) {
+                    // Special validation for eligibility
+                    const age = parseInt(document.getElementById('age').value);
+                    const existingLoan = document.querySelector('input[name="existingLoan"]:checked').value;
+                    const training = document.querySelector('input[name="training"]:checked').value;
+                    
+                    if (age < 18 || age > 35) {
+                        alert('You must be between 18 and 35 years old to qualify.');
+                        return;
+                    }
+                    
+                    if (existingLoan === 'yes') {
+                        alert('Applicants with existing government loans are not eligible.');
+                        return;
+                    }
+                    
+                    if (training === 'no') {
+                        alert('Mandatory entrepreneurship training attendance is required.');
+                        return;
+                    }
+                    
+                    currentSection++;
+                    showSection(currentSection);
+                } else {
+                    if (currentSection < totalSections) {
+                        currentSection++;
+                        showSection(currentSection);
+                    }
+                }
+            }
+        }
+        
+        function prevSection() {
+            if (currentSection > 1) {
+                currentSection--;
+                showSection(currentSection);
+            }
+        }
+        
+        function validateCurrentSection() {
+            let isValid = true;
+            
+            if (currentSection === 1) {
+                const nationalId = document.getElementById('nationalId').value.trim();
+                if (!nationalId) {
+                    alert('Please enter your National ID number');
+                    isValid = false;
+                } else if (!/^\d{8,10}$/.test(nationalId)) {
+                    alert('National ID must be 8-10 digits');
+                    isValid = false;
+                } else if (!document.getElementById('age').value) {
+                    alert('Please enter your age');
+                    isValid = false;
+                }
+            } else if (currentSection === 2) {
+                if (!document.getElementById('firstName').value.trim()) {
+                    alert('Please enter your first name');
+                    isValid = false;
+                } else if (!document.getElementById('lastName').value.trim()) {
+                    alert('Please enter your last name');
+                    isValid = false;
+                } else if (!document.getElementById('dateOfBirth').value) {
+                    alert('Please enter your date of birth');
+                    isValid = false;
+                } else if (!document.getElementById('gender').value) {
+                    alert('Please select your gender');
+                    isValid = false;
+                } else if (!document.getElementById('email').value.trim()) {
+                    alert('Please enter your email address');
+                    isValid = false;
+                } else if (!document.getElementById('phone').value.trim()) {
+                    alert('Please enter your phone number');
+                    isValid = false;
+                } else if (!/^\d{10}$/.test(document.getElementById('phone').value.trim())) {
+                    alert('Phone number must be 10 digits (e.g., 0712345678)');
+                    isValid = false;
+                } else if (!document.getElementById('county').value) {
+                    alert('Please select your county');
+                    isValid = false;
+                }
+            } else if (currentSection === 3) {
+                // Validate ID uploads
+                if (!idFiles.front) {
+                    showValidation('front', 'Please upload the front side of your National ID', 'error');
+                    isValid = false;
+                } else {
+                    showValidation('front', 'Front ID uploaded successfully', 'success');
+                }
+                
+                if (!idFiles.back) {
+                    showValidation('back', 'Please upload the back side of your National ID', 'error');
+                    isValid = false;
+                } else {
+                    showValidation('back', 'Back ID uploaded successfully', 'success');
+                }
+                
+                if (!idFiles.front || !idFiles.back) {
+                    alert('Please upload both front and back sides of your National ID');
+                    return false;
+                }
+            } else if (currentSection === 4) {
+                if (!document.getElementById('businessType').value) {
+                    alert('Please select your business type');
+                    isValid = false;
+                } else if (!document.getElementById('businessName').value.trim()) {
+                    alert('Please enter your proposed business name');
+                    isValid = false;
+                } else if (!document.getElementById('loanAmount').value) {
+                    alert('Please enter the loan amount requested');
+                    isValid = false;
+                } else if (!document.getElementById('jobsCreated').value) {
+                    alert('Please enter number of jobs to be created');
+                    isValid = false;
+                } else if (!document.getElementById('businessPlan').value.trim()) {
+                    alert('Please describe your business plan');
+                    isValid = false;
+                }
+            } else if (currentSection === 5) {
+                if (!selectedPaymentMethod) {
+                    alert('Please select a payment method');
+                    isValid = false;
+                } else if (!document.getElementById('transactionId').value.trim()) {
+                    alert('Please enter your transaction ID');
+                    isValid = false;
+                } else if (!document.getElementById('declaration').checked) {
+                    alert('You must accept the declaration to proceed');
+                    isValid = false;
+                }
+            }
+            
+            return isValid;
+        }
+        
+        // ID Upload Functions
+        function triggerFileInput(side) {
+            document.getElementById(`${side}IdInput`).click();
+        }
+        
+        function handleDragOver(e, side) {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById(`${side}UploadArea`).classList.add('dragover');
+        }
+        
+        function handleDragLeave(e, side) {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById(`${side}UploadArea`).classList.remove('dragover');
+        }
+        
+        function handleDrop(e, side) {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById(`${side}UploadArea`).classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0], side);
+            }
+        }
+        
+        function handleFileSelect(event, side) {
+            const file = event.target.files[0];
+            if (file) {
+                handleFile(file, side);
+            }
+        }
+        
+        function handleFile(file, side) {
+            // Validate file type
+            const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+            if (!validTypes.includes(file.type)) {
+                showValidation(side, 'Invalid file type. Please upload JPG or PNG only.', 'error');
+                return;
+            }
+            
+            // Validate file size (2MB max)
+            if (file.size > 2 * 1024 * 1024) {
+                showValidation(side, 'File too large. Maximum size is 2MB.', 'error');
+                return;
+            }
+            
+            // Store file
+            idFiles[side] = file;
+            
+            // Show preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById(`${side}Preview`);
+                const previewImage = document.getElementById(`${side}PreviewImage`);
+                const fileInfo = document.getElementById(`${side}FileInfo`);
+                const uploadBox = document.getElementById(`${side}IdBox`);
+                
+                previewImage.src = e.target.result;
+                preview.classList.add('active');
+                uploadBox.classList.add('active');
+                
+                // Update file info
+                fileInfo.innerHTML = `
+                    <i class="fas fa-file-image"></i>
+                    <strong>${file.name}</strong> (${formatFileSize(file.size)})<br>
+                    <i class="fas fa-calendar-alt"></i> Uploaded: ${new Date().toLocaleDateString()}
+                `;
+                
+                // Show success validation
+                showValidation(side, `${side.charAt(0).toUpperCase() + side.slice(1)} ID uploaded successfully`, 'success');
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        function removeFile(side) {
+            idFiles[side] = null;
+            const preview = document.getElementById(`${side}Preview`);
+            const input = document.getElementById(`${side}IdInput`);
+            const uploadBox = document.getElementById(`${side}IdBox`);
+            
+            preview.classList.remove('active');
+            uploadBox.classList.remove('active');
+            input.value = '';
+            
+            showValidation(side, `Please upload the ${side} side of your National ID`, 'error');
+        }
+        
+        function showValidation(side, message, type) {
+            const validation = document.getElementById(`${side}Validation`);
+            const text = document.getElementById(`${side}ValidationText`);
+            
+            text.textContent = message;
+            validation.className = `validation-message ${type} active`;
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' bytes';
+            else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+            else return (bytes / 1048576).toFixed(1) + ' MB';
+        }
+        
+        function selectPayment(method) {
+            selectedPaymentMethod = method;
+            
+            // Remove selected class from all
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked
+            event.currentTarget.classList.add('selected');
+        }
+        
+        function populateSummary() {
+            const summaryContent = document.getElementById('summaryContent');
+            const idUploadSummary = document.getElementById('idUploadSummary');
+            
+            // Get all form values
+            const nationalId = document.getElementById('nationalId').value;
+            const age = document.getElementById('age').value;
+            const employment = document.querySelector('input[name="employment"]:checked').value;
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const dateOfBirth = document.getElementById('dateOfBirth').value;
+            const gender = document.getElementById('gender').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const county = document.getElementById('county').value;
+            const address = document.getElementById('address').value;
+            const education = document.getElementById('education').value;
+            const businessType = document.getElementById('businessType').value;
+            const businessName = document.getElementById('businessName').value;
+            const loanAmount = document.getElementById('loanAmount').value;
+            const jobsCreated = document.getElementById('jobsCreated').value;
+            const businessPlan = document.getElementById('businessPlan').value;
+            const transactionId = document.getElementById('transactionId').value;
+            
+            // Format values for display
+            const employmentDisplay = {
+                'unemployed': 'Unemployed',
+                'underemployed': 'Underemployed',
+                'selfEmployed': 'Self-Employed (Informal)'
+            }[employment] || employment;
+            
+            const genderDisplay = {
+                'male': 'Male',
+                'female': 'Female'
+            }[gender] || gender;
+            
+            const countyDisplay = {
+                'nairobi': 'Nairobi',
+                'mombasa': 'Mombasa',
+                'kisumu': 'Kisumu',
+                'nakuru': 'Nakuru',
+                'uasingishu': 'Uasin Gishu',
+                'kakamega': 'Kakamega',
+                'bomet': 'Bomet',
+                'other': 'Other Counties'
+            }[county] || county;
+            
+            const educationDisplay = {
+                'primary': 'Primary School',
+                'secondary': 'Secondary School',
+                'certificate': 'Certificate',
+                'diploma': 'Diploma',
+                'degree': 'Degree',
+                'higher': 'Higher Degree'
+            }[education] || education;
+            
+            const businessTypeDisplay = {
+                'agriculture': 'Agriculture & Agri-business',
+                'manufacturing': 'Manufacturing',
+                'retail': 'Retail & Wholesale',
+                'services': 'Service Industry',
+                'technology': 'Technology & Innovation',
+                'tourism': 'Tourism & Hospitality'
+            }[businessType] || businessType;
+            
+            const paymentMethodDisplay = {
+                'mpesa': 'M-PESA',
+                'airtel': 'Airtel Money',
+                'bank': 'Bank Deposit'
+            }[selectedPaymentMethod] || selectedPaymentMethod;
+            
+            // ID Upload Status
+            const frontUploaded = idFiles.front ? '✓ Uploaded' : '✗ Not uploaded';
+            const backUploaded = idFiles.back ? '✓ Uploaded' : '✗ Not uploaded';
+            
+            idUploadSummary.style.display = 'block';
+            document.getElementById('idUploadStatus').innerHTML = `
+                Front Side: <strong style="color: ${idFiles.front ? '#28a745' : '#e74c3c'}">${frontUploaded}</strong><br>
+                Back Side: <strong style="color: ${idFiles.back ? '#28a745' : '#e74c3c'}">${backUploaded}</strong>
             `;
             
-            notificationArea.appendChild(notification);
+            // Create summary HTML
+            let summaryHTML = `
+                <h3 style="color: #006b3f; margin-bottom: 20px;">Application Summary</h3>
+                
+                <div class="summary-item">
+                    <div class="summary-label"><i class="fas fa-id-card"></i> Eligibility Information</div>
+                    <div class="summary-value">National ID: ${nationalId}</div>
+                    <div class="summary-value">Age: ${age} years</div>
+                    <div class="summary-value">Employment Status: ${employmentDisplay}</div>
+                </div>
+                
+                <div class="summary-item">
+                    <div class="summary-label"><i class="fas fa-user"></i> Personal Details</div>
+                    <div class="summary-value">Name: ${firstName} ${lastName}</div>
+                    <div class="summary-value">Date of Birth: ${dateOfBirth}</div>
+                    <div class="summary-value">Gender: ${genderDisplay}</div>
+                    <div class="summary-value">Contact: ${phone} | ${email}</div>
+                    <div class="summary-value">Address: ${address}, ${countyDisplay} County</div>
+                    <div class="summary-value">Education: ${educationDisplay}</div>
+                </div>
+                
+                <div class="summary-item">
+                    <div class="summary-label"><i class="fas fa-briefcase"></i> Business Proposal</div>
+                    <div class="summary-value">Business Type: ${businessTypeDisplay}</div>
+                    <div class="summary-value">Proposed Name: ${businessName}</div>
+                    <div class="summary-value">Loan Amount: KSH ${parseInt(loanAmount).toLocaleString()}</div>
+                    <div class="summary-value">Jobs to Create: ${jobsCreated}</div>
+                    <div class="summary-value">Business Plan: ${businessPlan.substring(0, 150)}${businessPlan.length > 150 ? '...' : ''}</div>
+                </div>
+                
+                <div class="summary-item">
+                    <div class="summary-label"><i class="fas fa-credit-card"></i> Payment Details</div>
+                    <div class="summary-value">Payment Method: ${paymentMethodDisplay}</div>
+                    <div class="summary-value">Transaction ID: ${transactionId}</div>
+                    <div class="summary-value">Registration Fee: KSH 100</div>
+                </div>
+                
+                <div class="info-box">
+                    <h4><i class="fas fa-exclamation-triangle"></i> IMPORTANT: Please review all information carefully before submission.</h4>
+                    <p>Once submitted, you cannot make changes to this application. Ensure all details are accurate.</p>
+                </div>
+            `;
             
-            // Show notification
-            setTimeout(() => {
-                notification.classList.add('show');
-            }, 10);
-            
-            // Remove notification after 5 seconds
-            setTimeout(() => {
-                notification.classList.remove('show');
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            }, 5000);
+            summaryContent.innerHTML = summaryHTML;
         }
-
-        // Mobile menu toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const mainNav = document.getElementById('mainNav');
         
-        menuToggle.addEventListener('click', function() {
-            mainNav.classList.toggle('active');
-            menuToggle.innerHTML = mainNav.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        });
-        
-        // Close menu when clicking outside on mobile
-        document.addEventListener('click', function(event) {
-            if (window.innerWidth <= 768) {
-                if (!mainNav.contains(event.target) && !menuToggle.contains(event.target)) {
-                    mainNav.classList.remove('active');
-                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-                }
-            }
-        });
-        
-        // Close menu when clicking a link
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', function() {
-                if (window.innerWidth <= 768) {
-                    mainNav.classList.remove('active');
-                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-                }
-            });
-        });
-
-        // Update enrollment progress
-        document.addEventListener('DOMContentLoaded', function() {
-            // Animate progress bar
-            const progressFill = document.getElementById('enrollmentProgress');
-            const currentEnrollment = document.getElementById('currentEnrollment');
-            
-            // Simulate enrollment count increase
-            let enrollmentCount = 1847;
-            const targetEnrollment = 2500;
-            const progressPercentage = (enrollmentCount / targetEnrollment) * 100;
-            
-            // Animate progress bar
-            setTimeout(() => {
-                progressFill.style.width = `${progressPercentage}%`;
-            }, 500);
-            
-            // Animate enrollment count
-            let count = 1800;
-            const countInterval = setInterval(() => {
-                count += 5;
-                currentEnrollment.textContent = count.toLocaleString();
-                
-                if (count >= enrollmentCount) {
-                    clearInterval(countInterval);
-                    currentEnrollment.textContent = enrollmentCount.toLocaleString();
-                }
-            }, 30);
-            
-            // Enrollment form submission
-            const enrollmentForm = document.getElementById('enrollmentForm');
-            const submitBtn = document.getElementById('submitBtn');
-            const successModal = document.getElementById('successModal');
-            const confirmedCourse = document.getElementById('confirmedCourse');
-            const confirmedEmail = document.getElementById('confirmedEmail');
-            const closeModal = document.getElementById('closeModal');
-            const closeModalBtn = document.getElementById('closeModalBtn');
-            
-            enrollmentForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                
-                // Show loading state
-                const originalBtnText = submitBtn.innerHTML;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-                submitBtn.classList.add('btn-loading');
-                submitBtn.disabled = true;
-                
-                // Get form values
-                const firstName = document.getElementById('firstName').value;
-                const lastName = document.getElementById('lastName').value;
-                const email = document.getElementById('email').value;
-                const phone = document.getElementById('phone').value || 'Not provided';
-                const course = document.getElementById('courseSelect').value;
-                const experience = document.querySelector('input[name="experience"]:checked').value;
-                const dob = document.getElementById('dob').value || 'Not provided';
-                const newsletter = document.getElementById('newsletter').checked ? 'Yes' : 'No';
-                const currentDate = new Date().toLocaleDateString('en-US', {
-                    weekday: 'long',
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-                const currentTime = new Date().toLocaleTimeString('en-US', {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: true
-                });
-                
-                // Update modal with user info
-                confirmedCourse.textContent = course;
-                confirmedEmail.textContent = email;
-                
-                try {
-                    // Prepare template parameters for EmailJS
-                    const templateParams = {
-                        first_name: firstName,
-                        last_name: lastName,
-                        full_name: `${firstName} ${lastName}`,
-                        email: email,
-                        phone: phone,
-                        course_name: course,
-                        experience: experience,
-                        dob: dob,
-                        date: currentDate,
-                        time: currentTime,
-                        newsletter: newsletter,
-                        enrollment_id: `GFK-${Date.now().toString().slice(-6)}`,
-                        portal_url: window.location.origin,
-                        support_email: "support@greenfirmkenya.com"
-                    };
-                    
-                    // Send email via EmailJS
-                    const response = await emailjs.send(
-                        EMAILJS_SERVICE_ID,
-                        EMAILJS_TEMPLATE_ID,
-                        templateParams
-                    );
-                    
-                    console.log('Email sent successfully:', response);
-                    
-                    // Show success notification
-                    showNotification('Confirmation email sent successfully!', 'success');
-                    
-                    // Show success modal
-                    successModal.style.display = 'flex';
-                    
-                    // Update enrollment count and progress
-                    enrollmentCount += 1;
-                    currentEnrollment.textContent = enrollmentCount.toLocaleString();
-                    const newProgressPercentage = (enrollmentCount / targetEnrollment) * 100;
-                    progressFill.style.width = `${newProgressPercentage}%`;
-                    
-                    // Reset form
-                    enrollmentForm.reset();
-                    
-                } catch (error) {
-                    console.error('Email sending failed:', error);
-                    
-                    // Show error notification
-                    showNotification('Email sending failed, but your enrollment was recorded.', 'error');
-                    
-                    // Still show success modal (fallback)
-                    successModal.style.display = 'flex';
-                    
-                    // Update modal message to indicate email issue
-                    confirmedCourse.innerHTML = course + '<br><small style="color: #ff4757;">(Email confirmation failed to send - check your inbox/spam)</small>';
-                    
-                    // Still update enrollment count
-                    enrollmentCount += 1;
-                    currentEnrollment.textContent = enrollmentCount.toLocaleString();
-                    const newProgressPercentage = (enrollmentCount / targetEnrollment) * 100;
-                    progressFill.style.width = `${newProgressPercentage}%`;
-                    
-                    // Reset form
-                    enrollmentForm.reset();
-                } finally {
-                    // Restore button state
-                    submitBtn.innerHTML = originalBtnText;
-                    submitBtn.classList.remove('btn-loading');
-                    submitBtn.disabled = false;
-                }
-            });
-            
-            // Close modal functions
-            closeModal.addEventListener('click', function() {
-                successModal.style.display = 'none';
-            });
-            
-            closeModalBtn.addEventListener('click', function() {
-                successModal.style.display = 'none';
-            });
-            
-            // Close modal when clicking outside
-            successModal.addEventListener('click', function(e) {
-                if (e.target === successModal) {
-                    successModal.style.display = 'none';
-                }
-            });
-            
-            // Enroll buttons on course cards
-            const enrollButtons = document.querySelectorAll('.enroll-btn');
-            enrollButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const courseName = this.getAttribute('data-course');
-                    document.getElementById('courseSelect').value = courseName;
-                    
-                    // Scroll to enrollment form
-                    document.getElementById('enroll').scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-            
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('nav a, .btn-primary').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    if (this.getAttribute('href') && this.getAttribute('href').startsWith('#')) {
-                        e.preventDefault();
-                        const targetId = this.getAttribute('href');
-                        if (targetId === '#') return;
-                        
-                        const targetElement = document.querySelector(targetId);
-                        if (targetElement) {
-                            targetElement.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                        }
-                    }
-                });
-            });
-            
-            // Fix viewport height on mobile fixes
-            function setVH() {
-                let vh = window.innerHeight * 0.01;
-                document.documentElement.style.setProperty('--vh', `${vh}px`);
+        function submitForm() {
+            if (!validateCurrentSection()) {
+                return;
             }
             
-            setVH();
-            window.addEventListener('resize', setVH);
-            window.addEventListener('orientationchange', setVH);
-        });
+            // Check if both ID sides are uploaded
+            if (!idFiles.front || !idFiles.back) {
+                alert('Please upload both front and back sides of your National ID');
+                return;
+            }
+            
+            // Generate random reference number
+            const refNumber = 'KEN/GOV/YBL/' + new Date().getFullYear() + '/' + 
+                Math.random().toString(36).substring(2, 10).toUpperCase();
+            
+            // Hide form and show success message
+            document.querySelector('.form-container').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('referenceNumber').textContent = refNumber;
+            
+            // In a real application, you would send data to server here
+            console.log('Application submitted:', {
+                reference: refNumber,
+                nationalId: document.getElementById('nationalId').value,
+                name: document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                loanAmount: document.getElementById('loanAmount').value,
+                paymentMethod: selectedPaymentMethod,
+                transactionId: document.getElementById('transactionId').value,
+                idFiles: {
+                    front: idFiles.front ? idFiles.front.name : 'Not uploaded',
+                    back: idFiles.back ? idFiles.back.name : 'Not uploaded'
+                }
+            });
+        }
+        
+        function resetForm() {
+            // Reset form
+            document.querySelector('.form-container').style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+            
+            // Reset all form fields
+            document.querySelectorAll('input, select, textarea').forEach(field => {
+                if (field.type === 'checkbox' || field.type === 'radio') {
+                    field.checked = false;
+                } else {
+                    field.value = '';
+                }
+            });
+            
+            // Reset radio buttons to default
+            document.getElementById('unemployed').checked = true;
+            document.getElementById('loanNo').checked = true;
+            document.getElementById('trainingYes').checked = true;
+            
+            // Reset ID uploads
+            idFiles = { front: null, back: null };
+            document.querySelectorAll('.preview-container').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.id-upload-box').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.file-input').forEach(el => el.value = '');
+            document.querySelectorAll('.validation-message').forEach(el => el.classList.remove('active'));
+            
+            // Reset payment selection
+            selectedPaymentMethod = '';
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Reset to first section
+            currentSection = 1;
+            showSection(currentSection);
+        }
+        
+        // Initialize form
+        updateProgressBar();
+        
+        // Set default date for date of birth (18 years ago)
+        window.onload = function() {
+            const today = new Date();
+            const minDate = new Date(today.getFullYear() - 35, today.getMonth(), today.getDate());
+            const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+            
+            document.getElementById('dateOfBirth').min = minDate.toISOString().split('T')[0];
+            document.getElementById('dateOfBirth').max = maxDate.toISOString().split('T')[0];
+            
+            // Set default age based on date range
+            document.getElementById('age').value = 25;
+        };
+
+        // Update selectPayment function to show/hide payment button
+function selectPayment(method) {
+    selectedPaymentMethod = method;
+    
+    // Remove selected class from all
+    document.querySelectorAll('.payment-method').forEach(el => {
+        el.classList.remove('selected');
+    });
+    
+    // Add selected class to clicked
+    event.currentTarget.classList.add('selected');
+    
+    // Show payment action section
+    const paymentActionSection = document.getElementById('paymentActionSection');
+    const alternativeInfo = document.getElementById('alternativePaymentInfo');
+    const paymentInstructions = document.getElementById('paymentInstructions');
+    
+    paymentActionSection.style.display = 'block';
+    
+    // Update account number display
+    const nationalId = document.getElementById('nationalId').value || 'Your National ID';
+    document.getElementById('paymentAccountNumber').textContent = nationalId;
+    
+    // Show appropriate content based on selected method
+    if (method === 'bank') {
+        document.getElementById('payNowBtn').style.display = 'flex';
+        alternativeInfo.style.display = 'none';
+    } else {
+        document.getElementById('payNowBtn').style.display = 'none';
+        alternativeInfo.style.display = 'block';
+        }
+    }
+// M-PESA Payment Function (Connect to your API)
+function initiateMpesaPayment() {
+    const nationalId = document.getElementById('nationalId').value;
+    const phone = document.getElementById('phone').value;
+    const payNowBtn = document.getElementById('payNowBtn');
+    
+    // Validate required fields
+    if (!nationalId) {
+        alert('Please enter your National ID first');
+        document.getElementById('nationalId').focus();
+        return;
+    }
+    
+    if (!phone) {
+        alert('Please enter your phone number first');
+        document.getElementById('phone').focus();
+        return;
+    }
+    
+    // Disable button and show loading
+    payNowBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing Payment...';
+    payNowBtn.disabled = true;
+    
+    // Your M-PESA API integration here
+    // Example structure:
+    const paymentData = {
+        amount: 100,
+        phone: phone.replace(/^0/, '254'), // Convert to international format
+        accountReference: nationalId,
+        transactionDesc: "Youth Loan Registration Fee"
+    };
+    
+    // Example API call (replace with your actual endpoint)
+    fetch('https://your-api.com/mpesa/stkpush', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
+        },
+        body: JSON.stringify(paymentData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Show success message
+            alert('Payment request sent! Please check your phone and enter your M-PESA PIN to complete payment.');
+            
+            // Start polling for payment confirmation
+            checkPaymentStatus(data.CheckoutRequestID);
+        } else {
+            throw new Error(data.message || 'Payment failed');
+        }
+    })
+    .catch(error => {
+        alert('Payment failed: ' + error.message);
+        payNowBtn.innerHTML = '<i class="fas fa-lock"></i> Pay KSH 100 via M-PESA';
+        payNowBtn.disabled = false;
+    });
+}
+
+// Check payment status (polling)
+function checkPaymentStatus(checkoutRequestId) {
+    const maxAttempts = 10;
+    let attempts = 0;
+    
+    const pollStatus = setInterval(() => {
+        attempts++;
+        
+        fetch(`https://your-api.com/mpesa/query?CheckoutRequestID=${checkoutRequestId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.ResultCode === '0') {
+                    // Payment successful
+                    clearInterval(pollStatus);
+                    
+                    // Auto-fill transaction ID
+                    document.getElementById('transactionId').value = data.MpesaReceiptNumber;
+                    
+                    // Show success
+                    alert(`Payment successful! Transaction ID: ${data.MpesaReceiptNumber}`);
+                    
+                    // Re-enable button
+                    const payNowBtn = document.getElementById('payNowBtn');
+                    payNowBtn.innerHTML = '<i class="fas fa-check-circle"></i> Payment Successful';
+                    payNowBtn.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+                    
+                } else if (data.ResultCode !== '0' || attempts >= maxAttempts) {
+                    clearInterval(pollStatus);
+                    
+                    // Re-enable button
+                    const payNowBtn = document.getElementById('payNowBtn');
+                    payNowBtn.innerHTML = '<i class="fas fa-lock"></i> Pay KSH 100 via M-PESA';
+                    payNowBtn.disabled = false;
+                }
+            })
+            .catch(error => {
+                console.error('Status check error:', error);
+            });
+    }, 3000); // Check every 3 seconds
+}
+
+// Simpler version if you're redirecting to payment page
+function initiateMpesaPaymentSimple() {
+    const nationalId = document.getElementById('nationalId').value;
+    const phone = document.getElementById('phone').value;
+    
+    if (!nationalId || !phone) {
+        alert('Please fill in National ID and Phone Number first');
+        return;
+    }
+    
+    // Redirect to your payment page with parameters
+    const paymentUrl = `https://your-payment-gateway.com/pay?amount=100&phone=${encodeURIComponent(phone)}&reference=${encodeURIComponent(nationalId)}&callback=${encodeURIComponent(window.location.href)}`;
+    
+    // Open in new tab or redirect
+    window.open(paymentUrl, '_blank');
+    
+    // Or redirect in same window
+    // window.location.href = paymentUrl;
+}
     </script>
 </body>
 </html>
