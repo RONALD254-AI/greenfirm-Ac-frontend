@@ -341,8 +341,8 @@
             const reference = generateReference();
             const amount = 10000; // 100 KSH in kobo
             
-            // Create a temporary email for Paystack
-            const tempEmail = `New user`;
+            // Create a valid email for Paystack - FIXED LINE
+            const tempEmail = `user-${Date.now()}@ministry-youth.ke`;
             
             // Configure Paystack
             const handler = PaystackPop.setup({
@@ -372,23 +372,23 @@
                     ]
                 },
                 callback: function(response) {
-                // Payment was successful - show immediate success
-                document.getElementById('loadingState').innerHTML = `
-                    <div class="mb-6">
-                        <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 mb-4">
-                            <i class="fas fa-check-circle text-white text-3xl"></i>
-                        </div>
-                        <h2 class="text-2xl font-bold text-white mb-3">Payment Successful!</h2>
-                        <p class="text-green-400">Reference: ${response.reference}</p>
-                        <p class="text-gray-400 mt-4">Processing your registration...</p>
-                        <div class="mt-6">
-                            <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
-                                <div class="h-full bg-green-500 rounded-full loading-progress"></div>
+                    // Payment was successful - show immediate success
+                    document.getElementById('loadingState').innerHTML = `
+                        <div class="mb-6">
+                            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 mb-4">
+                                <i class="fas fa-check-circle text-white text-3xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-white mb-3">Payment Successful!</h2>
+                            <p class="text-green-400">Reference: ${response.reference}</p>
+                            <p class="text-gray-400 mt-4">Processing your registration...</p>
+                            <div class="mt-6">
+                                <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                    <div class="h-full bg-green-500 rounded-full loading-progress"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `;
-                    
+                    `;
+                        
                     // Verify payment with your backend
                     verifyPayment(response.reference, normalizedPhone, phone);
                 },
